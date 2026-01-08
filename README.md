@@ -7,13 +7,13 @@
 1. Install dependencies using `uv sync`
 
 
-2. Run the app `uv run streamlit run streamlit_app.py`
+2. Run the app `uv run streamlit run src/yandex_stt/main.py`
 
    Or activate the virtual environment and run directly:
 
    ```bash
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   streamlit run streamlit_app.py
+   streamlit run src/yandex_stt/main.py
    ```
 
 ### Managing dependencies
