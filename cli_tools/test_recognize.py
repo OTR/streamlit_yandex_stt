@@ -3,7 +3,11 @@ import sys
 from pathlib import Path
 from dotenv import load_dotenv
 
-from src.yandex_stt.adapter.yandex_speech_client import YandexSpeechClient
+# Add src directory to Python path
+src_path: Path = Path(__file__).parent.parent / "src"
+sys.path.insert(0, str(src_path))
+
+from yandex_stt.adapter.yandex_speech_client import YandexSpeechClient
 
 
 def main() -> None:
@@ -14,7 +18,7 @@ def main() -> None:
         print("Please set it with: export YANDEX_AI_STUDIO_API_KEY='your_api_key'")
         sys.exit(1)
 
-    audio_path: Path = Path('assets/russian_speech.wav')
+    audio_path: Path = Path(__file__).parent.parent / 'assets' / 'russian_speech.wav'
     if not audio_path.exists():
         print(f"Error: Audio file not found at {audio_path}")
         sys.exit(1)

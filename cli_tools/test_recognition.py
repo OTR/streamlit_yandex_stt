@@ -5,7 +5,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 # Add src directory to Python path
-src_path: Path = Path(__file__).parent / "src"
+src_path: Path = Path(__file__).parent.parent / "src"
 sys.path.insert(0, str(src_path))
 
 from yandex_stt.adapter.yandex_speech_client import YandexSpeechClient
@@ -13,7 +13,7 @@ from yandex_stt.adapter.yandex_speech_client import YandexSpeechClient
 
 def main() -> None:
     load_dotenv()
-    audio_file: Path = Path(__file__).parent / "assets" / "russian_speech.wav"
+    audio_file: Path = Path(__file__).parent.parent / "assets" / "russian_speech.wav"
     
     if not audio_file.exists():
         print(f"Error: Audio file not found at {audio_file}")
