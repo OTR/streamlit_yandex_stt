@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title("🎈 My new app")
-st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
-)
+
+def main() -> None:
+    st.title("🎈 My Speech to Text app")
+    st.write("Let's start recognizing speech to text! [docs.streamlit.io](https://docs.streamlit.io/).")
