@@ -8,4 +8,5 @@ dependencies = [
     "yandex-speechkit==1.5.0",
     "python-dotenv==1.2.1",
     "audioop-lts==0.2.2",
+    "pydantic-settings>=2.12.0",
 ]
