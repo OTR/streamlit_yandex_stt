@@ -1,8 +1,10 @@
 from speechkit import model_repository, configure_credentials, creds
 from speechkit.stt import AudioProcessingType
 
+from yandex_stt.application.interface.base_speech_client import BaseSpeechClient
 
-class YandexSpeechClient:
+
+class SyncYandexSpeechClient(BaseSpeechClient):
 
     def __init__(self, api_key: str) -> None:
         configure_credentials(

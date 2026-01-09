@@ -2,37 +2,38 @@ import os
 import sys
 from pathlib import Path
 from dotenv import load_dotenv
+from yandex_stt.application.interface.base_speech_client import BaseSpeechClient
 
 # Add src directory to Python path
 src_path: Path = Path(__file__).parent.parent / "src"
 sys.path.insert(0, str(src_path))
 
-from yandex_stt.adapter.yandex_speech_client import YandexSpeechClient
+from yandex_stt.adapter.sync_yandex_speech_client import SyncYandexSpeechClient
 
 
 def main() -> None:
     load_dotenv()
     audio_file: Path = Path(__file__).parent.parent / "assets" / "russian_speech.wav"
-    
+
     if not audio_file.exists():
         print(f"Error: Audio file not found at {audio_file}")
         sys.exit(1)
-    
+
     print(f"Loading audio file: {audio_file}")
     print(f"Audio file size: {audio_file.stat().st_size / 1024:.2f} KB")
-    
-    print("\nInitializing YandexSpeechClient...")
+
+    print("\nInitializing SyncYandexSpeechClient...")
     print("(Reading API key from .env file: YANDEX_AI_STUDIO_API_KEY)")
-    
+
     try:
         api_key: str = os.getenv('YANDEX_AI_STUDIO_API_KEY', '')
-        client: YandexSpeechClient = YandexSpeechClient(api_key=api_key)
+        client: BaseSpeechClient = SyncYandexSpeechClient(api_key=api_key)
         print("✓ Client initialized successfully")
-        
+
         print(f"\nRecognizing speech from {audio_file.name}...")
         print("This may take a moment...")
         result: str = client.recognize(str(audio_file))
-        
+
         print("\n" + "=" * 80)
         print("RECOGNITION RESULT:")
         print("=" * 80)
@@ -40,7 +41,7 @@ def main() -> None:
         print("=" * 80)
         print(f"\n✓ Recognition completed successfully!")
         print(f"Recognized text length: {len(result)} characters")
-        
+
     except ValueError as e:
         if "YANDEX_AI_STUDIO_API_KEY" in str(e):
             print(f"\n✗ Configuration Error: {e}")
