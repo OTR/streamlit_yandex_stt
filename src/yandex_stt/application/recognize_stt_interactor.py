@@ -1,14 +1,13 @@
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import BinaryIO
 
 from yandex_stt.adapter.yandex_speech_client import YandexSpeechClient
 
 
+@dataclass
 class RecognizeSTTInteractor:
-    """Handles speech-to-text recognition use case."""
-
-    def __init__(self, speech_client: YandexSpeechClient) -> None:
-        self._speech_client: YandexSpeechClient = speech_client
+    speech_client: YandexSpeechClient = field(repr=False)
 
     def execute(self, audio_file: BinaryIO) -> str:
         """Recognizes speech from uploaded audio file and returns transcribed text."""
@@ -21,7 +20,7 @@ class RecognizeSTTInteractor:
             tmp_file.flush()
 
             try:
-                result: str = self._speech_client.recognize(str(tmp_path))
+                result: str = self.speech_client.recognize(str(tmp_path))
                 return result
             finally:
                 if tmp_path.exists():
